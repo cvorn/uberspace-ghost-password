@@ -17,7 +17,7 @@ Daher erstellen wir zunächst eine Subdomain, mit der wir zukünftig auf das Bac
     RewriteRule ^(.*) http://localhost:12345/\$1 [P]
     __EOF__
 
-"ghost.lisbeht.amnesia.de" ist in diesem Fall der Name der Subdomain, über die wir zukünftig auf das Backend zugreifen, 12345 ist die Portnummer. Die Anweisungen in der .htaccess-Datei erlauben den Zugriff, wenn der Pfad `/ghost` (für das Backend) oder `/content` (für Bilder) enthält. Der direkte Zugriff auf die Blogseiten ist nicht möglich. Hinweis: Damit schaffen wir eine Sicherheitslücke, denn über http://ghost.lisbeth.amnesia.uberspace.de/content ist nun der Zugriff auf die Bilder möglich, sofern der genaue Pfad bekannt ist. Lässt man das `[OR] RewriteCond %{REQUEST_URI} "/content/"` weg, ist dies nicht mehr möglich, dann können wir beim Bearbeiten die Bilder nicht in der Vorschau sehen.  
+"ghost.lisbeth.amnesia.de" ist in diesem Fall der Name der Subdomain, über die wir zukünftig auf das Backend zugreifen, 12345 ist die Portnummer. Die Anweisungen in der .htaccess-Datei erlauben den Zugriff, wenn der Pfad `/ghost` (für das Backend) oder `/content` (für Bilder) enthält. Der direkte Zugriff auf die Blogseiten ist nicht möglich. Hinweis: Damit schaffen wir eine Sicherheitslücke, denn über http://ghost.lisbeth.amnesia.uberspace.de/content ist nun der Zugriff auf die Bilder möglich, sofern der genaue Pfad bekannt ist. Lässt man das `[OR] RewriteCond %{REQUEST_URI} "/content/"` weg, ist dies nicht mehr möglich, dann können wir beim Bearbeiten die Bilder nicht in der Vorschau sehen.  
 Im zweiten Schritt richten wir nun wie oben erwähnt den Passwortschutz für Ghost ein. Dazu ergänzen wir in der .htaccess-Datei im ~/html-Verzeichnis (oder unter der Subdomain, unter der wir Ghost installiert haben) folgende Zeilen (einfach mit einem beliebigen Texteditor oben einfügen):
 
     AuthType Basic
@@ -28,6 +28,7 @@ Im zweiten Schritt richten wir nun wie oben erwähnt den Passwortschutz für Gho
 Mit `htpasswd -c /var/www/virtual/lisbeth/html/.htpasswd lisbeth` legen wir dann eine passende .htpasswd-Datei mit den zulässigen Benutzern an (in diesem Fall ein Benutzer "lisbeth", das Passwort wird abgefragt).  
 
 Damit wir nicht immer "ghost.lisbeth.amnesia.de/ghost/" (der schließende Slash ist wichtig) aufrufen müssen, können wir noch eine Umleitung von http://[blog-url]/ghost erstellen. Dazu müssen wir zwischen `RewriteEngine On` und `RewriteRule` folgende zwei Zeilen ergänzen:
+
     RewriteCond %{REQUEST_URI} "/ghost"
     RewriteRule ^(.*) http://ghost.lisbeth.amnesia.uberspace.de/ghost/ [L,R=301] [L]
 
