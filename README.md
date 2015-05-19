@@ -25,7 +25,7 @@ Im zweiten Schritt richten wir nun wie oben erwähnt den Passwortschutz für Gho
     AuthUserFile /var/www/virtual/lisbeth/html/.htpasswd
     Require valid-user
 
-Mit `htpasswd -c /var/www/virtual/lisbeth/html/.htpasswd lisbeth` legen wir dann eine passende .htpasswd-Datei mit den zulässigen Benutzern an (in diesem Fall ein Benutzer "lisbeth", das Passwort wird abgefragt).  
+Mit `htpasswd -c /var/www/virtual/lisbeth/html/.htpasswd lisbeth` legen wir dann eine passende .htpasswd-Datei mit den zulässigen Benutzern an (in diesem Fall ein Benutzer "lisbeth", das Passwort wird abgefragt). Weitere Hinweise zur Verwendung von .htaccess-Dateien zum Verzeichnisschutz gibt es [im Wiki von uberspace](https://wiki.uberspace.de/webserver:htaccess#verzeichnisschutz)  
 
 Damit wir nicht immer "ghost.lisbeth.amnesia.de/ghost/" (der schließende Slash ist wichtig) aufrufen müssen, können wir noch eine Umleitung von http://[blog-url]/ghost erstellen. Dazu müssen wir zwischen `RewriteEngine On` und `RewriteRule` folgende zwei Zeilen ergänzen:
 
