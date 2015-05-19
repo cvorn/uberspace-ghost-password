@@ -32,5 +32,5 @@ Damit wir nicht immer "ghost.lisbeth.amnesia.de/ghost/" (der schließende Slash 
     RewriteCond %{REQUEST_URI} "/ghost"
     RewriteRule ^(.*) https://ghost.lisbeth.amnesia.uberspace.de/ghost/ [L,R=301] [L]
 
-Wenn wir nun http://lisbeth.amnesia.uberspace.de/ghost aufrufen und mit dem richtigen Passwort eingeloggt sind, werden wir automatisch zum Backend umgeleitet. Die URL leitet auf https weiter, damit das Passwort nicht unverschlüsselt übertragen wird. Solltest du eine eigene Domain verwenden, gilt das Wildcard-SSL-Zertifikat natürlich nicht, dann empfiehlt es sich, ggf. [ein eigenes Zertifikat hochzuladen](https://wiki.uberspace.de/webserver:https).  
+Wenn wir nun http://lisbeth.amnesia.uberspace.de/ghost aufrufen und mit dem richtigen Passwort eingeloggt sind, werden wir automatisch zum Backend umgeleitet. Die URL leitet auf https weiter, damit das Passwort nicht unverschlüsselt übertragen wird. Das Wildcard-SSL-Zertifikat von uberspace deckt keine "Subdomains von Subdomains" und auch keine eigenen Domains ab, daher empfiehlt es sich [ein eigenes Zertifikat für die passende (Sub)Domain hochzuladen](https://wiki.uberspace.de/webserver:https).  
 Fertig! Auf das Blog kann nun nur noch mit Passwort zugegriffen werden, während das Einloggen ins Backend ohne Probleme möglich ist.
